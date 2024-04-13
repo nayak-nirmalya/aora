@@ -1,6 +1,7 @@
 import { View, Text, ScrollView, Image } from "react-native";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Link } from "expo-router";
 
 import { images } from "../../constants";
 import { CustomButton, FormField } from "../../components";
@@ -17,7 +18,7 @@ const SignIn = () => {
   return (
     <SafeAreaView className="bg-primary h-full">
       <ScrollView>
-        <View className="w-full justify-center h-full px-4 my-6">
+        <View className="w-full justify-center min-h-[85vh] px-4 my-6">
           <Image
             source={images.logo}
             resizeMode="contain"
@@ -30,7 +31,7 @@ const SignIn = () => {
           <FormField
             title="Email"
             value={form.email}
-            placeholder="nayak.nirmalya@hotmail.com"
+            placeholder="Enter Email"
             handleChangeText={(e) => setForm({ ...form, email: e })}
             otherStyles="mt-7"
             keyboardType="email-address"
@@ -38,7 +39,7 @@ const SignIn = () => {
           <FormField
             title="Password"
             value={form.password}
-            placeholder="**********"
+            placeholder="Enter Password"
             handleChangeText={(e) => setForm({ ...form, password: e })}
             otherStyles="mt-7"
           />
@@ -49,6 +50,18 @@ const SignIn = () => {
             containerStyles="mt-7"
             isLoading={isSubmitting}
           />
+
+          <View className="justify-center pt-5 flex-row gap-2">
+            <Text className="text-lg text-gray-100 font-pregular">
+              Don't have an account?
+            </Text>
+            <Link
+              href="/sign-up"
+              className="text-lg font-psemibold text-secondary"
+            >
+              Sign Up
+            </Link>
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
