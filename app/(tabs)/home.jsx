@@ -1,11 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { FlatList, Image, RefreshControl, Text, View } from "react-native";
+import {
+  Alert,
+  FlatList,
+  Image,
+  RefreshControl,
+  Text,
+  View,
+} from "react-native";
 
 import { images } from "../../constants";
 import { EmptyState, SearchInput, Trending } from "../../components";
+import { getAllPosts } from "../../lib/appwrite";
 
 const Home = () => {
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
 
   const onRefresh = async () => {
@@ -13,6 +23,23 @@ const Home = () => {
     // refetch posts
     setRefreshing(false);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+
+      try {
+        const response = await getAllPosts();
+        setData(response);
+      } catch (error) {
+        console.error("[HomeUseEffect]", error);
+        Alert.alert("Error", error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
     <SafeAreaView className="bg-primary h-full">
