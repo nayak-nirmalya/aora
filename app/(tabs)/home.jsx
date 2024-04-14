@@ -3,6 +3,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { FlatList, Image, RefreshControl, Text, View } from "react-native";
 
 import { images } from "../../constants";
+import { SearchInput } from "../../components";
 
 const Home = () => {
   const [refreshing, setRefreshing] = useState(false);
@@ -37,7 +38,8 @@ const Home = () => {
                 />
               </View>
             </View>
-            {/* TODO: Search Component */}
+
+            <SearchInput />
           </View>
         )}
       />
