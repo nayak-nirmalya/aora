@@ -3,7 +3,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { FlatList, Image, RefreshControl, Text, View } from "react-native";
 
 import { images } from "../../constants";
-import { SearchInput } from "../../components";
+import { SearchInput, Trending } from "../../components";
 
 const Home = () => {
   const [refreshing, setRefreshing] = useState(false);
@@ -40,8 +40,17 @@ const Home = () => {
             </View>
 
             <SearchInput />
+
+            <View className="w-full flex-1 pt-5 pb-8">
+              <Text className="text-lg font-pregular text-gray-100 mb-3">
+                Latest Videos
+              </Text>
+
+              <Trending posts={[{ id: 1 }, { id: 2 }, { id: 3 }] ?? []} />
+            </View>
           </View>
         )}
+        ListEmptyComponent={() => <Text>Empty</Text>}
       />
     </SafeAreaView>
   );
