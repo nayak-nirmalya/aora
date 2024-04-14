@@ -8,6 +8,7 @@ import { CustomButton, FormField } from "../../components";
 import { createUser } from "../../lib/appwrite";
 
 const SignUp = () => {
+  const { setUser, setIsLoggedIn } = useGlobalContext();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [form, setForm] = useState({
     username: "",
@@ -24,12 +25,13 @@ const SignUp = () => {
 
     try {
       const result = await createUser(form.email, form.password, form.username);
+      setUser(result);
+      setIsLoggedIn(true);
 
-      // TODO: set it to global context
-
+      Alert.alert("Success", "You have successfully signed up");
       router.replace("/home");
     } catch (error) {
-      console.error("[Submit]", error);
+      console.error("[SubmitSignUp]", error);
       Alert.alert("Error", error.message);
     } finally {
       setIsSubmitting(false);
