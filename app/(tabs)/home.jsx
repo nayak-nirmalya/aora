@@ -8,10 +8,16 @@ import { EmptyState, SearchInput, Trending } from "../../components";
 const Home = () => {
   const [refreshing, setRefreshing] = useState(false);
 
+  const onRefresh = async () => {
+    setRefreshing(true);
+    // refetch posts
+    setRefreshing(false);
+  };
+
   return (
-    <SafeAreaView className="bg-primary">
+    <SafeAreaView className="bg-primary h-full">
       <FlatList
-        data={[{ id: 1 }, { id: 1 }, { id: 1 }]}
+        data={[{ id: 1 }, { id: 2 }, { id: 3 }]}
         keyExtractor={(item) => item.$id}
         renderItem={({ item }) => (
           <Text key={item.id} className="text-3xl text-white">
@@ -55,6 +61,9 @@ const Home = () => {
             title="No Videos Found"
             subtitle="Be the first one to upload a video"
           />
+        }
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       />
     </SafeAreaView>
