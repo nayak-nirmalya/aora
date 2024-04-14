@@ -3,7 +3,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { FlatList, Image, RefreshControl, Text, View } from "react-native";
 
 import { images } from "../../constants";
-import { SearchInput, Trending } from "../../components";
+import { EmptyState, SearchInput, Trending } from "../../components";
 
 const Home = () => {
   const [refreshing, setRefreshing] = useState(false);
@@ -50,7 +50,12 @@ const Home = () => {
             </View>
           </View>
         )}
-        ListEmptyComponent={() => <Text>Empty</Text>}
+        ListEmptyComponent={
+          <EmptyState
+            title="No Videos Found"
+            subtitle="Be the first one to upload a video"
+          />
+        }
       />
     </SafeAreaView>
   );
