@@ -12,39 +12,22 @@ import {
 import { images } from "../../constants";
 import { EmptyState, SearchInput, Trending } from "../../components";
 import { getAllPosts } from "../../lib/appwrite";
+import useAppwrite from "../../lib/useAppwrite";
 
 const Home = () => {
-  const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const { data: posts, isLoading, refetch } = useAppwrite(getAllPosts);
   const [refreshing, setRefreshing] = useState(false);
 
   const onRefresh = async () => {
     setRefreshing(true);
-    // refetch posts
+    await refetch();
     setRefreshing(false);
   };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-
-      try {
-        const response = await getAllPosts();
-        setData(response);
-      } catch (error) {
-        console.error("[HomeUseEffect]", error);
-        Alert.alert("Error", error.message);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
 
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
-        data={[{ id: 1 }, { id: 2 }, { id: 3 }]}
+        data={posts}
         keyExtractor={(item) => item.$id}
         renderItem={({ item }) => (
           <Text key={item.id} className="text-3xl text-white">
