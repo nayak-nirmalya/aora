@@ -5,12 +5,14 @@ import { router } from "expo-router";
 import { useGlobalContext } from "../../context/GlobalProvider";
 import { getUserPosts } from "../../lib/appwrite";
 import useAppwrite from "../../lib/useAppwrite";
-import { EmptyState, VideoCard } from "../../components";
+import { EmptyState, VideoCard, InfoBox } from "../../components";
 import { icons } from "../../constants";
 
 const Profile = () => {
   const { user, setUser, setIsLogged } = useGlobalContext();
   const { data: posts } = useAppwrite(() => getUserPosts(user.$id));
+
+  const logout = async () => {};
 
   return (
     <SafeAreaView className="bg-primary h-full">
@@ -27,7 +29,7 @@ const Profile = () => {
         ListHeaderComponent={() => (
           <View className="w-full flex justify-center items-center mt-6 mb-12 px-4">
             <TouchableOpacity
-              onPress={() => {}}
+              onPress={logout}
               className="flex w-full items-end mb-10"
             >
               <Image
