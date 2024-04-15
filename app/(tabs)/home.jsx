@@ -6,8 +6,10 @@ import { images } from "../../constants";
 import { EmptyState, SearchInput, Trending, VideoCard } from "../../components";
 import { getAllPosts, getLatestPosts } from "../../lib/appwrite";
 import useAppwrite from "../../lib/useAppwrite";
+import { useGlobalContext } from "../../context/GlobalProvider";
 
 const Home = () => {
+  const { user, setUser, setIsLoggedIn } = useGlobalContext();
   const { data: posts, refetch } = useAppwrite(getAllPosts);
   const { data: latestPosts } = useAppwrite(getLatestPosts);
   const [refreshing, setRefreshing] = useState(false);
@@ -29,10 +31,10 @@ const Home = () => {
             <View className="flex-row mb-6 items-start justify-between">
               <View>
                 <Text className="font-pmedium text-sm text-gray-100">
-                  Welcome Back
+                  Welcome Back,
                 </Text>
                 <Text className="text-2xl font-psemibold text-white">
-                  Nirmalya Nayak
+                  {user?.username.toUpperCase()}
                 </Text>
               </View>
 
