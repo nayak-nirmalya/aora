@@ -6,6 +6,7 @@ import { Link, router } from "expo-router";
 import { images } from "../../constants";
 import { CustomButton, FormField } from "../../components";
 import { createUser } from "../../lib/appwrite";
+import { useGlobalContext } from "../../context/GlobalProvider";
 
 const SignUp = () => {
   const { setUser, setIsLoggedIn } = useGlobalContext();
