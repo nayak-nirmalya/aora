@@ -15,6 +15,7 @@ import * as DocumentPicker from "expo-document-picker";
 import { icons } from "../../constants";
 import { CustomButton, FormField } from "../../components";
 import { useGlobalContext } from "../../context/GlobalProvider";
+import { createVideoPost } from "../../lib/appwrite";
 
 const Create = () => {
   const { user } = useGlobalContext();
