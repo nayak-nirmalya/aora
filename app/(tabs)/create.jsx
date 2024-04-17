@@ -10,6 +10,7 @@ import {
   ScrollView,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import * as DocumentPicker from "expo-document-picker";
 
 import { icons } from "../../constants";
 import { CustomButton, FormField } from "../../components";
@@ -25,7 +26,9 @@ const Create = () => {
     prompt: "",
   });
 
-  const openPicker = async (selectType) => {};
+  const openPicker = async (selectType) => {
+    const result = await DocumentPicker;
+  };
 
   const submit = async () => {};
 
